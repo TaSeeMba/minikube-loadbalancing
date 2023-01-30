@@ -1,0 +1,7 @@
+.git
+env.*
+.vscode
+.dockerignore
+*.pyc
+kubernetes-manifests
+__pycache__

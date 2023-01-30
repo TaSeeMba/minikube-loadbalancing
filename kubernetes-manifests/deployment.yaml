@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minikube-loadbalancing
+  labels:
+    app: minikube-loadbalancing
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: minikube-loadbalancing
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: minikube-loadbalancing
+    spec:
+      containers:
+      - name: event-service
+        image: minikube-loadbalancing:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+          name: "http"
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "400Mi"
+          requests:
+            cpu: "100m"
+            memory: "200Mi"
+        # readinessProbe:
+        #   httpGet:
+        #     path: /hello
+        #     port: 8080
+        #   periodSeconds: 30
+        # livenessProbe:
+        #   httpGet:
+        #     path: /hello
+        #     port: 8080
+        #   periodSeconds: 30
