@@ -1,13 +1,15 @@
 # Minikube loadbalancing 
 
-This repo contains a simple python hello world api, some Kubernetes manifests and instructions in the ReadMe file of how to deploy this in a loadbalanced way on minikube. 
+This repo contains a simple python hello world api, some Kubernetes manifests and instructions of deploying this app in a loadbalanced way on minikube. 
 
 The api is developed in python using Flask. To make it production ready, the code is configured to run in an application (uwsgi) and be served by a web server (nginx). 
 
-For deploymet into kubernetes, we make use of Docker for packaging the application. Kubernetes manifests are used for defining the deployment manifests. This project makes use of loadbalancing provided by the kubernetes the service object which exposes the running application in the  cluster behind a single outward-facing endpoint which splits the traffic across the multiple pods it serves.
+For deployment into kubernetes, we first package the app in Docker and develop some Kubernetes manifests for deployment. 
+
+Loadbalancing is provided by the kubernetes the service object which exposes the running application in the  cluster behind a single outward-facing endpoint which splits the traffic across the multiple pods it serves.
 
 ## Dependencies
-- Machine capable of running Minikube
+- Machine capable of running Minikube. See setup instructions [here](https://minikube.sigs.k8s.io/docs/start/). 
 - Docker installed and running on the machine
 - Python 3 installed on machine
 
@@ -29,7 +31,7 @@ pip install -r code/requirements.txt
 python code/app.py
 ```
 
-Navigate to a web browser and enter `http://localhost:8080/hello` . You should see a hello world json returned.
+Navigate to a web browser and enter `http://localhost:8080/hello` or `http://localhost:8080/square?number=3`. You should see output results returned.
 
 ## Packaging and running the python app in Docker
 
@@ -59,12 +61,12 @@ sudo install minikube-darwin-amd64 /usr/local/bin/minikube
 minikube start
 ```
 
-2. Create minikube tunnel to expose Kubernetes services of kind `Loadbalancer`. See [this](https://minikube.sigs.k8s.io/docs/handbook/accessing/) guide.  Run this command in a separate terminal window to keep the LoadBalancer running. 
+2. Create minikube tunnel to expose Kubernetes services of kind `Loadbalancer`. Run this command in a separate terminal window to keep the LoadBalancer running. Follow [this](https://minikube.sigs.k8s.io/docs/handbook/accessing/) guide.  
 ```
 minikube tunnel
 ```
 
-3. Build Docker image and load it into minikube
+3. Build Docker image and load it into minikube registry
 ```
 minikube image build -t minikube-loadbalancing:v1 .
 ```
@@ -82,9 +84,4 @@ kubectl get svc -n minikube-loadbalancing-example
 Copy the EXTERNAL-IP. 
 
 6. Access the application in your browser.
-http://REPLACE_WITH_EXTERNAL_IP:8080
-
-
-## Ideas for improvements for deploying the application into a production setup
-1. Create a helm chart for deployment manifests
-2. Make use of an ingress controller to have a single loadbalancer for traffic into the cluster. 
+http://REPLACE_WITH_EXTERNAL_IP:8080/hello

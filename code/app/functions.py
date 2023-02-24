@@ -1,10 +1,3 @@
-
-
-# def multiple(num):
-#   if num.isnumeric():
-#     return int(num) * int(num)
-#   else:
-#     return 'Provide good inputs'
-
-def multiple(num):
+# Return square of supplied number
+def square(num):
   return int(num) * int(num)

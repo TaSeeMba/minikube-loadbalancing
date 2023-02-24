@@ -11,13 +11,13 @@ def helloworld():
         return jsonify(data)
   
   
-@app.route('/calculate', methods=['GET'])
+@app.route('/square', methods=['GET'])
 def calculate():
     if(request.method == 'GET'):
         number = request.args.get('number')
         result = ''
         if number.isnumeric():
-            result = functions.multiple(int(number))
+            result = functions.square(int(number))
         else:
             result = 'Provide good inputs'
         data = {"data": result}
