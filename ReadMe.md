@@ -1,5 +1,9 @@
 # Minikube loadbalancing 
 
+<p align="center">
+  <img src="loadbalancing.gif">
+</p>
+
 This repo contains a simple python hello world api, some Kubernetes manifests and instructions of deploying this app in a loadbalanced way on minikube. 
 
 The api is developed in python using Flask. To make it production ready, the code is configured to run in an application (uwsgi) and be served by a web server (nginx). 
