@@ -1,5 +1,8 @@
 # Minikube loadbalancing 
 
+**Challenge**: Write a simple hello world application in any one of these languages: Python, Ruby, Go. Build
+the application within a Docker container and then load balance the application within minikube.
+
 <p align="center">
   <img src="loadbalancing.gif">
 </p>
