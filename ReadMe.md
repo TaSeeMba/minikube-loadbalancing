@@ -91,4 +91,4 @@ kubectl get svc -n minikube-loadbalancing-example
 Copy the EXTERNAL-IP. 
 
 6. Access the application in your browser.
-http://REPLACE_WITH_EXTERNAL_IP:8080/hello
+`http://REPLACE_WITH_EXTERNAL_IP:8080/hello`
